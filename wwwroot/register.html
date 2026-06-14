@@ -3,87 +3,247 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Rejestracja</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Konto użytkownika</title>
 
     <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Segoe UI, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
             background: #f5f6f8;
+            min-height: 100vh;
+            padding: 40px 20px;
         }
 
-        .register-box {
-            width: 500px;
-            margin: 80px auto;
-            background: white;
-            padding: 40px;
-            border-radius: 20px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, .1);
+        .header {
+            max-width: 1000px;
+            margin: 0 auto 30px auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        h1 {
-            margin-bottom: 25px;
+        .logo {
+            font-size: 42px;
+            font-weight: 700;
             color: #ff5a00;
+            text-decoration: none;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            color: #ff5a00;
+            border: 2px solid #ff5a00;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-weight: 600;
+            transition: .2s;
+        }
+
+        .back-btn:hover {
+            background: #fff0e8;
+        }
+
+        .auth-container {
+            width: 100%;
+            max-width: 1000px;
+            margin: auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .auth-card {
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, .08);
+        }
+
+        .auth-card h3 {
+            color: #ff5a00;
+            margin-bottom: 25px;
+            font-size: 32px;
         }
 
         input {
             width: 100%;
-            padding: 12px;
+            padding: 14px;
             margin-bottom: 15px;
             border: 1px solid #ddd;
-            border-radius: 10px;
+            border-radius: 12px;
+            font-size: 15px;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #ff5a00;
         }
 
         button {
             width: 100%;
-            padding: 14px;
+            border: none;
             background: #ff5a00;
             color: white;
-            border: none;
-            border-radius: 10px;
+            padding: 14px;
+            border-radius: 12px;
             font-size: 16px;
-        }
-
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            text-decoration: none;
-            color: #ff5a00;
             font-weight: 600;
-            margin-bottom: 25px;
+            cursor: pointer;
             transition: .2s;
+            margin-bottom: 10px;
         }
 
-        .back-link:hover {
-            font-size: 24px;
+        button:hover {
+            background: #e85000;
+        }
+
+        .gray-btn {
+            background: #f3f4f6;
+            color: #333;
+        }
+
+        .gray-btn:hover {
+            background: #e5e7eb;
+        }
+
+        .danger-btn {
+            background: #dc3545;
+        }
+
+        .danger-btn:hover {
+            background: #bb2d3b;
+        }
+
+        #profileForm {
+            display: none;
+            max-width: 1000px;
+            margin: 30px auto 0;
+            background: white;
+            padding: 35px;
+            border-radius: 20px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, .08);
+        }
+
+        #profileForm h3 {
             color: #ff5a00;
+            margin-bottom: 20px;
+        }
+
+        .small-info {
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .message {
+            max-width: 1000px;
+            margin: 20px auto;
+            padding: 15px;
+            border-radius: 12px;
+            background: #e7f5ff;
+        }
+
+        @media(max-width:768px) {
+
+            .auth-container {
+                grid-template-columns: 1fr;
+            }
+
+            .header {
+                flex-direction: column;
+                gap: 15px;
+            }
         }
     </style>
-
 </head>
 
 <body>
 
-    <div class="register-box">
-        <a href="index.html" class="back-link">
+    <div class="header">
+
+        <a href="index.html" class="logo">
+            allegro
+        </a>
+
+        <a href="index.html" class="back-btn">
             ← Powrót do aukcji
         </a>
 
-        <h1>Załóż konto</h1>
+    </div>
 
-        <input id="userUsername" placeholder="Nazwa użytkownika">
+    <div id="message" class="message">
+        Rejestracja i logowanie użytkownika.
+    </div>
 
-        <input id="userEmail" placeholder="Email">
+    <div class="auth-container">
 
-        <input id="userFirstName" placeholder="Imię">
+        <div class="auth-card">
 
-        <input id="userLastName" placeholder="Nazwisko">
+            <h3>Załóż konto</h3>
 
-        <button onclick="createUser()">
-            Utwórz konto
+            <input id="registerUsername" placeholder="Nazwa użytkownika">
+
+            <input id="registerEmail" placeholder="Email">
+
+            <input id="registerFirstName" placeholder="Imię">
+
+            <input id="registerLastName" placeholder="Nazwisko">
+
+            <button onclick="registerUser()">
+                Załóż konto
+            </button>
+
+        </div>
+
+        <div class="auth-card">
+
+            <h3>Zaloguj się</h3>
+
+            <input id="loginEmail" placeholder="Email użytkownika">
+
+            <button onclick="loginUser()">
+                Zaloguj
+            </button>
+
+            <button class="gray-btn" onclick="logoutUser()">
+                Wyloguj
+            </button>
+
+        </div>
+
+    </div>
+
+    <div id="profileForm">
+
+        <h3>Mój profil</h3>
+
+        <p class="small-info">
+            Zarządzanie kontem użytkownika.
+        </p>
+
+        <input id="profileId" disabled placeholder="ID użytkownika">
+
+        <input id="profileUsername" placeholder="Nazwa użytkownika">
+
+        <input id="profileEmail" placeholder="Email">
+
+        <input id="profileFirstName" placeholder="Imię">
+
+        <input id="profileLastName" placeholder="Nazwisko">
+
+        <button onclick="updateProfile()">
+            Zapisz zmiany
         </button>
 
-        <div id="message"></div>
+        <button class="danger-btn" onclick="deleteMyAccount()">
+            Usuń konto
+        </button>
 
     </div>
 
@@ -91,13 +251,17 @@
 
         const apiUrl = window.location.origin;
 
-        async function createUser() {
+        function showMessage(text) {
+            document.getElementById("message").innerText = text;
+        }
+
+        async function registerUser() {
 
             const user = {
-                username: document.getElementById("userUsername").value,
-                email: document.getElementById("userEmail").value,
-                firstName: document.getElementById("userFirstName").value,
-                lastName: document.getElementById("userLastName").value
+                username: document.getElementById("registerUsername").value,
+                email: document.getElementById("registerEmail").value,
+                firstName: document.getElementById("registerFirstName").value,
+                lastName: document.getElementById("registerLastName").value
             };
 
             const response = await fetch(`${apiUrl}/users`, {
@@ -110,21 +274,159 @@
 
             if (response.ok) {
 
-                document.getElementById("message").innerHTML =
-                    "Konto zostało utworzone";
+                const createdUser = await response.json();
+
+                localStorage.setItem(
+                    "loggedUserId",
+                    createdUser.id
+                );
+
+                localStorage.setItem(
+                    "currentUser",
+                    JSON.stringify(createdUser)
+                );
+
+                showMessage(
+                    "Konto zostało utworzone i zalogowano użytkownika."
+                );
 
                 setTimeout(() => {
                     window.location.href = "index.html";
-                }, 1500);
+                }, 1000);
 
             } else {
 
                 const error = await response.json();
 
-                document.getElementById("message").innerHTML =
-                    error.message || "Błąd rejestracji";
+                showMessage(
+                    error.message || "Błąd rejestracji."
+                );
             }
         }
+
+        async function loginUser() {
+
+            const email =
+                document.getElementById("loginEmail").value;
+
+            const response =
+                await fetch(`${apiUrl}/users`);
+
+            if (!response.ok) {
+
+                showMessage(
+                    "Nie udało się pobrać użytkowników."
+                );
+
+                return;
+            }
+
+            const users =
+                await response.json();
+
+            const user =
+                users.find(
+                    u => u.email.toLowerCase() === email.toLowerCase()
+                );
+
+            if (!user) {
+
+                showMessage(
+                    "Nie znaleziono użytkownika."
+                );
+
+                return;
+            }
+
+            localStorage.setItem(
+                "loggedUserId",
+                user.id
+            );
+
+            localStorage.setItem(
+                "currentUser",
+                JSON.stringify(user)
+            );
+
+            showMessage(
+                `Zalogowano jako ${user.username}`
+            );
+
+            setTimeout(() => {
+                window.location.href = "index.html";
+            }, 1000);
+        }
+
+        function logoutUser() {
+
+            localStorage.removeItem(
+                "loggedUserId"
+            );
+
+            localStorage.removeItem(
+                "currentUser"
+            );
+
+            document.getElementById(
+                "profileForm"
+            ).style.display = "none";
+
+            showMessage(
+                "Wylogowano."
+            );
+        }
+
+        function loadProfile() {
+
+            const user =
+                JSON.parse(
+                    localStorage.getItem("currentUser")
+                );
+
+            if (!user) {
+                return;
+            }
+
+            document.getElementById(
+                "profileForm"
+            ).style.display = "block";
+
+            document.getElementById(
+                "profileId"
+            ).value = user.id;
+
+            document.getElementById(
+                "profileUsername"
+            ).value = user.username;
+
+            document.getElementById(
+                "profileEmail"
+            ).value = user.email;
+
+            document.getElementById(
+                "profileFirstName"
+            ).value = user.firstName;
+
+            document.getElementById(
+                "profileLastName"
+            ).value = user.lastName;
+        }
+
+        async function updateProfile() {
+
+            showMessage(
+                "Dodaj endpoint PUT /users/{id}"
+            );
+        }
+
+        async function deleteMyAccount() {
+
+            showMessage(
+                "Dodaj endpoint DELETE /users/{id}"
+            );
+        }
+
+        loadProfile();
 
     </script>
 

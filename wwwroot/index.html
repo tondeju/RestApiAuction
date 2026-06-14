@@ -52,27 +52,27 @@
             transition: .2s;
         }
 
-            .nav-link:hover {
-                background: #f4f4f4;
-            }
+        .nav-link:hover {
+            background: #f4f4f4;
+        }
 
         .sell-btn {
             background: #ff5a00;
             color: white;
         }
 
-            .sell-btn:hover {
-                background: #e85000;
-            }
+        .sell-btn:hover {
+            background: #e85000;
+        }
 
         .account-btn {
             border: 2px solid #ff5a00;
             color: #ff5a00;
         }
 
-            .account-btn:hover {
-                background: #fff0e8;
-            }
+        .account-btn:hover {
+            background: #fff0e8;
+        }
 
         .container {
             max-width: 1400px;
@@ -88,10 +88,10 @@
             margin-bottom: 24px;
         }
 
-            .hero h1 {
-                font-size: 42px;
-                margin-bottom: 8px;
-            }
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 8px;
+        }
 
         section {
             background: white;
@@ -136,25 +136,25 @@
             margin-bottom: 8px;
         }
 
-            button:hover {
-                background: #e85000;
-            }
+        button:hover {
+            background: #e85000;
+        }
 
         .gray-btn {
             background: #666;
         }
 
-            .gray-btn:hover {
-                background: #444;
-            }
+        .gray-btn:hover {
+            background: #444;
+        }
 
         .danger-btn {
             background: #c0392b;
         }
 
-            .danger-btn:hover {
-                background: #962d22;
-            }
+        .danger-btn:hover {
+            background: #962d22;
+        }
 
         .message {
             background: #e7f5ff;
@@ -192,9 +192,25 @@
             transition: .2s;
         }
 
-            .auction:hover {
-                transform: translateY(-3px);
-            }
+        .auction:hover {
+            transform: translateY(-3px);
+        }
+
+        .user-panel {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        #loggedUser {
+            font-weight: 600;
+            color: #333;
+        }
+
+        #logoutBtn {
+            margin: 0;
+            padding: 10px 16px;
+        }
 
         .price {
             font-size: 28px;
@@ -237,17 +253,17 @@
             overflow: hidden;
         }
 
-            .users-table th,
-            .users-table td {
-                padding: 10px;
-                border-bottom: 1px solid #e6e6e6;
-                text-align: left;
-            }
+        .users-table th,
+        .users-table td {
+            padding: 10px;
+            border-bottom: 1px solid #e6e6e6;
+            text-align: left;
+        }
 
-            .users-table th {
-                background: #fff0e8;
-                color: #333;
-            }
+        .users-table th {
+            background: #fff0e8;
+            color: #333;
+        }
 
         @media(max-width:768px) {
             .header {
@@ -283,23 +299,31 @@
 
         <nav class="nav-menu">
 
-            <a href="#auctionsSection" class="nav-link">
-                Aukcje
+            <a href="index.html" class="nav-link">
+                🏠 Aukcje
             </a>
 
-            <a href="#addAuctionSection" class="nav-link sell-btn">
+            <a href="add-auction.html" class="nav-link sell-btn">
                 + Sprzedaj
             </a>
 
-            <a href="#accountSection" class="nav-link account-btn">
-                Konto
+            <a href="delete-auction.html" class="nav-link">
+                🗑️ Usuń aukcję
             </a>
 
-            <a href="#usersSection" class="nav-link">
-                Użytkownicy
+            <a href="register.html" class="nav-link account-btn">
+                Załóż konto
             </a>
+
+
 
         </nav>
+        <div class="user-panel">
+            <span id="loggedUser"></span>
+            <button id="logoutBtn" onclick="logoutUser()" style="display:none;">
+                Wyloguj
+            </button>
+        </div>
 
     </header>
 
@@ -318,7 +342,7 @@
                 Nie jesteś zalogowany.
             </div>
 
-            <div class="row">
+            <!-- <div class="row">
                 <div>
                     <h3>Załóż konto</h3>
                     <input id="registerUsername" placeholder="Nazwa użytkownika">
@@ -348,7 +372,7 @@
 
                 <button onclick="updateProfile()">Zapisz zmiany</button>
                 <button class="danger-btn" onclick="deleteMyAccount()">Usuń konto</button>
-            </div>
+            </div> -->
         </section>
 
         <section id="usersSection">
@@ -440,29 +464,45 @@
         }
 
         function showLoggedUser() {
-            const loggedUserBox = document.getElementById("loggedUserBox");
-            const profileForm = document.getElementById("profileForm");
+
+            const loggedUserBox =
+                document.getElementById("loggedUserBox");
+
+            const loggedUserLabel =
+                document.getElementById("loggedUser");
+
+            const logoutBtn =
+                document.getElementById("logoutBtn");
 
             if (loggedUser == null) {
-                loggedUserBox.innerHTML = "Nie jesteś zalogowany.";
-                profileForm.style.display = "none";
+
+                loggedUserBox.innerHTML =
+                    "Nie jesteś zalogowany.";
+
+                loggedUserLabel.innerHTML =
+                    "👤 Niezalogowany";
+
+                logoutBtn.style.display =
+                    "none";
+
                 return;
             }
 
             loggedUserBox.innerHTML = `
-                    Zalogowano jako: <strong>${loggedUser.username}</strong><br>
-                    ID użytkownika: <strong>${loggedUser.id}</strong><br>
-                    Email: ${loggedUser.email}
-                `;
+        Zalogowano jako:
+        <strong>${loggedUser.username}</strong><br>
+        ID użytkownika:
+        <strong>${loggedUser.id}</strong><br>
+        Email: ${loggedUser.email}
+    `;
 
-            profileForm.style.display = "block";
+            loggedUserLabel.innerHTML =
+                `👤 ${loggedUser.username}`;
 
-            document.getElementById("profileId").value = loggedUser.id;
-            document.getElementById("profileUsername").value = loggedUser.username;
-            document.getElementById("profileEmail").value = loggedUser.email;
-            document.getElementById("profileFirstName").value = loggedUser.firstName;
-            document.getElementById("profileLastName").value = loggedUser.lastName;
+            logoutBtn.style.display =
+                "inline-block";
         }
+
 
         async function loadLoggedUserFromStorage() {
             const userId = localStorage.getItem("loggedUserId");

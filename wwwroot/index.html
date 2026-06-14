@@ -323,6 +323,9 @@
             <button id="logoutBtn" onclick="logoutUser()" style="display:none;">
                 Wyloguj
             </button>
+            <a href="admin.html" class="nav-link">
+                ⚙️ Admin
+            </a>
         </div>
 
     </header>
@@ -342,29 +345,6 @@
                 Nie jesteś zalogowany.
             </div>
 
-        </section>
-
-        <section id="usersSection">
-            <h2>Lista użytkowników</h2>
-            <p class="small-info">Pomocnicza lista do sprawdzenia, jakie ID i email mają użytkownicy w bazie.</p>
-
-            <button onclick="loadUsers()">Odśwież listę użytkowników</button>
-
-            <div id="usersList"></div>
-        </section>
-
-        <section id="addAuctionSection">
-            <h2>Wystaw przedmiot na aukcję</h2>
-            <p class="small-info">Aukcja zostanie przypisana do aktualnie zalogowanego użytkownika.</p>
-
-            <input id="auctionTitle" placeholder="Tytuł aukcji">
-            <textarea id="auctionDescription" placeholder="Opis"></textarea>
-            <input id="auctionCategory" placeholder="Kategoria">
-            <input id="auctionStartingPrice" type="number" placeholder="Cena wywoławcza">
-            <input id="auctionStartDate" type="datetime-local">
-            <input id="auctionEndDate" type="datetime-local">
-
-            <button onclick="createAuction()">Dodaj aukcję</button>
         </section>
 
         <section id="auctionsSection">

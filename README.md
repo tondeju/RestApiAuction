@@ -277,21 +277,8 @@ https://localhost:xxxx/swagger
 
 ---
 
-## Możliwe rozszerzenia projektu
-
-- Logowanie JWT
-- Role użytkowników
-- Upload zdjęć aukcji
-- Komentarze i oceny użytkowników
-- Powiadomienia e-mail
-- Automatyczne zamykanie aukcji
-- Panel administratora
-- Docker
-- Testy jednostkowe
-- CI/CD
-
----
-
 ## Autor
 
 Projekt wykonany w celach edukacyjnych jako implementacja systemu aukcyjnego opartego o REST API i ASP.NET Core.
+Julian Tonder
+Mateusz Wielgat

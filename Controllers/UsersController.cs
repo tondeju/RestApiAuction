@@ -19,7 +19,6 @@ public class UsersController : ControllerBase
     public async Task<ActionResult<List<UserReadDto>>> GetAll()
     {
         var users = await _userService.GetAllAsync();
-
         return Ok(users);
     }
 
@@ -27,11 +26,8 @@ public class UsersController : ControllerBase
     public async Task<ActionResult<UserReadDto>> GetById(int id)
     {
         var user = await _userService.GetByIdAsync(id);
-
         if (user == null)
-        {
             return NotFound(new { message = "User not found." });
-        }
 
         return Ok(user);
     }
@@ -40,30 +36,43 @@ public class UsersController : ControllerBase
     public async Task<ActionResult<UserReadDto>> Create(UserCreateDto dto)
     {
         var result = await _userService.CreateAsync(dto);
-
         if (!result.Success)
-        {
             return BadRequest(new { message = result.Error });
-        }
 
         return CreatedAtAction(nameof(GetById), new { id = result.User!.Id }, result.User);
+    }
+
+    [HttpPost("register")]
+    public async Task<ActionResult<UserReadDto>> Register(RegisterDto dto)
+    {
+        var result = await _userService.RegisterAsync(dto);
+        if (!result.Success)
+            return BadRequest(new { message = result.Error });
+
+        return CreatedAtAction(nameof(GetById), new { id = result.User!.Id }, result.User);
+    }
+
+    [HttpPost("login")]
+    public async Task<ActionResult<LoginResponseDto>> Login(LoginDto dto)
+    {
+        var result = await _userService.LoginAsync(dto);
+        if (!result.Success)
+            return Unauthorized(new { message = result.Error });
+
+        return Ok(result.Response);
     }
 
     [HttpPut("{id}")]
     public async Task<IActionResult> Update(int id, UserUpdateDto dto)
     {
         var result = await _userService.UpdateAsync(id, dto);
-
         if (!result.Success)
         {
             if (result.Error == "User not found.")
-            {
                 return NotFound(new { message = result.Error });
-            }
 
             return BadRequest(new { message = result.Error });
         }
-
         return NoContent();
     }
 
@@ -71,11 +80,8 @@ public class UsersController : ControllerBase
     public async Task<IActionResult> Delete(int id)
     {
         var deleted = await _userService.DeleteAsync(id);
-
         if (!deleted)
-        {
             return NotFound(new { message = "User not found." });
-        }
 
         return NoContent();
     }

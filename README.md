@@ -283,4 +283,6 @@ Projekt wykonany w celach edukacyjnych jako implementacja systemu aukcyjnego opa
 
 <tr>
 Julian Tonder,
-Mateusz Wielgat
+Mateusz Wielgat,
+Filip Wojtan,
+Radosław Kur,

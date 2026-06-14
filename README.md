@@ -280,5 +280,7 @@ https://localhost:xxxx/swagger
 ## Autor
 
 Projekt wykonany w celach edukacyjnych jako implementacja systemu aukcyjnego opartego o REST API i ASP.NET Core.
-Julian Tonder
+
+<tr>
+Julian Tonder,
 Mateusz Wielgat

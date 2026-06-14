@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Usuń aukcję</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f5f6f8;
+        }
+
+        .header {
+            background: white;
+            height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, .08);
+        }
+
+        .logo {
+            color: #ff5a00;
+            font-size: 42px;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .back-btn {
+            text-decoration: none;
+            color: #ff5a00;
+            border: 2px solid #ff5a00;
+            padding: 12px 20px;
+            border-radius: 12px;
+            font-weight: 600;
+        }
+
+        .back-btn:hover {
+            background: #fff0e8;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: 50px auto;
+            padding: 0 20px;
+        }
+
+        .card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, .08);
+        }
+
+        h1 {
+            margin-bottom: 20px;
+            color: #dc3545;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #ddd;
+            border-radius: 12px;
+        }
+
+        .delete-btn {
+            background: #dc3545;
+            color: white;
+            border: none;
+            padding: 14px 25px;
+            border-radius: 12px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .delete-btn:hover {
+            background: #bb2d3b;
+        }
+
+        .message {
+            margin-top: 20px;
+            padding: 15px;
+            background: #f8f9fa;
+            border-radius: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header class="header">
+
+        <a href="index.html" class="logo">
+            allegro
+        </a>
+
+        <a href="index.html" class="back-btn">
+            ← Powrót do aukcji
+        </a>
+
+    </header>
+
+    <div class="container">
+
+        <div class="card">
+
+            <h1>Usuń aukcję</h1>
+
+            <div class="form-group">
+
+                <label>
+                    ID aukcji
+                </label>
+
+                <input id="auctionId" type="number" placeholder="Podaj ID aukcji">
+
+            </div>
+
+            <button class="delete-btn" onclick="deleteAuction()">
+
+                Usuń aukcję
+
+            </button>
+
+            <div id="message" class="message">
+                Wprowadź ID aukcji do usunięcia.
+            </div>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        const apiUrl = window.location.origin;
+
+        function showMessage(text) {
+            document.getElementById("message").innerText = text;
+        }
+
+        async function deleteAuction() {
+
+            const auctionId =
+                Number(document.getElementById("auctionId").value);
+
+            if (!auctionId) {
+                showMessage("Podaj ID aukcji.");
+                return;
+            }
+
+            if (!confirm("Czy na pewno chcesz usunąć aukcję?")) {
+                return;
+            }
+
+            const response = await fetch(
+                `${apiUrl}/auctions/${auctionId}`,
+                {
+                    method: "DELETE"
+                }
+            );
+
+            if (response.ok) {
+
+                showMessage("Aukcja została usunięta.");
+
+                setTimeout(() => {
+                    window.location.href = "index.html";
+                }, 1500);
+
+            } else {
+
+                let errorMessage = "Nie udało się usunąć aukcji.";
+
+                try {
+                    const error = await response.json();
+                    errorMessage = error.message || errorMessage;
+                }
+                catch { }
+
+                showMessage(errorMessage);
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>

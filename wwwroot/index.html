@@ -263,6 +263,10 @@
                 + Sprzedaj
             </a>
 
+            <a href="delete-auction.html" class="nav-link">
+                🗑️ Usuń aukcję
+            </a>
+
             <a href="register.html" class="nav-link account-btn">
                 Załóż konto
             </a>
@@ -280,33 +284,6 @@
         <h1>System aukcji internetowych REST</h1>
 
         <div id="message" class="message">Frontend działa. Dane są pobierane przez REST API.</div>
-
-        <!-- <section>
-            <h2>Dodaj użytkownika</h2>
-            <input id="userUsername" placeholder="Nazwa użytkownika">
-            <input id="userEmail" placeholder="Email">
-            <input id="userFirstName" placeholder="Imię">
-            <input id="userLastName" placeholder="Nazwisko">
-            <button onclick="createUser()">Dodaj użytkownika</button>
-        </section>
-
-        <section>
-            <h2>Użytkownicy</h2>
-            <button onclick="loadUsers()">Odśwież użytkowników</button>
-            <div id="usersList"></div>
-        </section> -->
-
-        <!-- <section>
-            <h2>Dodaj aukcję</h2>
-            <input id="auctionTitle" placeholder="Tytuł aukcji">
-            <textarea id="auctionDescription" placeholder="Opis"></textarea>
-            <input id="auctionCategory" placeholder="Kategoria">
-            <input id="auctionStartingPrice" type="number" placeholder="Cena wywoławcza">
-            <input id="auctionStartDate" type="datetime-local">
-            <input id="auctionEndDate" type="datetime-local">
-            <input id="auctionOwnerId" type="number" placeholder="ID właściciela">
-            <button onclick="createAuction()">Dodaj aukcję</button>
-        </section> -->
 
         <section>
             <h2>Aukcje</h2>
@@ -510,7 +487,7 @@
             }
 
             loadUsers();
-            loadAuctions();
+            loadAuctions()
         </script>
     </div>
 </body>

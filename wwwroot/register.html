@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Rejestracja</title>
+
+    <style>
+        body {
+            font-family: Segoe UI, sans-serif;
+            background: #f5f6f8;
+        }
+
+        .register-box {
+            width: 500px;
+            margin: 80px auto;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, .1);
+        }
+
+        h1 {
+            margin-bottom: 25px;
+            color: #ff5a00;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+        }
+
+        button {
+            width: 100%;
+            padding: 14px;
+            background: #ff5a00;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+        }
+
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: #ff5a00;
+            font-weight: 600;
+            margin-bottom: 25px;
+            transition: .2s;
+        }
+
+        .back-link:hover {
+            font-size: 24px;
+            color: #ff5a00;
+        }
+    </style>
+
+</head>
+
+<body>
+
+    <div class="register-box">
+        <a href="index.html" class="back-link">
+            ← Powrót do aukcji
+        </a>
+
+        <h1>Załóż konto</h1>
+
+        <input id="userUsername" placeholder="Nazwa użytkownika">
+
+        <input id="userEmail" placeholder="Email">
+
+        <input id="userFirstName" placeholder="Imię">
+
+        <input id="userLastName" placeholder="Nazwisko">
+
+        <button onclick="createUser()">
+            Utwórz konto
+        </button>
+
+        <div id="message"></div>
+
+    </div>
+
+    <script>
+
+        const apiUrl = window.location.origin;
+
+        async function createUser() {
+
+            const user = {
+                username: document.getElementById("userUsername").value,
+                email: document.getElementById("userEmail").value,
+                firstName: document.getElementById("userFirstName").value,
+                lastName: document.getElementById("userLastName").value
+            };
+
+            const response = await fetch(`${apiUrl}/users`, {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(user)
+            });
+
+            if (response.ok) {
+
+                document.getElementById("message").innerHTML =
+                    "Konto zostało utworzone";
+
+                setTimeout(() => {
+                    window.location.href = "index.html";
+                }, 1500);
+
+            } else {
+
+                const error = await response.json();
+
+                document.getElementById("message").innerHTML =
+                    error.message || "Błąd rejestracji";
+            }
+        }
+
+    </script>
+
+</body>
+
+</html>

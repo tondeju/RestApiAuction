@@ -1,0 +1,518 @@
+﻿<!DOCTYPE html>
+<html lang="pl">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Projekt aukcji REST</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .header {
+            height: 80px;
+            background: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 40px;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, .08);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 42px;
+            font-weight: 700;
+            color: #ff5a00;
+            letter-spacing: -2px;
+        }
+
+        .nav-menu {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .nav-link {
+            text-decoration: none;
+            color: #333;
+            font-weight: 600;
+            padding: 12px 18px;
+            border-radius: 12px;
+            transition: .2s;
+        }
+
+        .nav-link:hover {
+            background: #f4f4f4;
+        }
+
+        .sell-btn {
+            background: #ff5a00;
+            color: white;
+        }
+
+        .sell-btn:hover {
+            background: #e85000;
+        }
+
+        .account-btn {
+            border: 2px solid #ff5a00;
+            color: #ff5a00;
+        }
+
+        .account-btn:hover {
+            background: #fff0e8;
+        }
+
+        @media(max-width:768px) {
+
+            .header {
+                flex-direction: column;
+                height: auto;
+                padding: 15px;
+                gap: 15px;
+            }
+
+            .nav-menu {
+                width: 100%;
+                justify-content: center;
+                flex-wrap: wrap;
+            }
+        }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: #f7f7f7;
+            color: #222;
+        }
+
+        .header {
+            background: white;
+            padding: 20px 40px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, .08);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: 700;
+            color: #ff5a00;
+        }
+
+        .search {
+            flex: 1;
+            display: flex;
+        }
+
+        .search input {
+            border: 2px solid #ff5a00;
+            border-right: none;
+            border-radius: 10px 0 0 10px;
+        }
+
+        .search button {
+            width: 150px;
+            border: none;
+            background: #ff5a00;
+            color: white;
+            border-radius: 0 10px 10px 0;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        section {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 25px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, .06);
+        }
+
+        h2 {
+            margin-bottom: 15px;
+            color: #222;
+        }
+
+        input,
+        textarea,
+        select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            margin-bottom: 12px;
+        }
+
+        button {
+            background: #ff5a00;
+            color: white;
+            border: none;
+            padding: 12px 18px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: .2s;
+            font-weight: 600;
+        }
+
+        button:hover {
+            background: #e85000;
+        }
+
+        #auctionsList {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 20px;
+        }
+
+        .auction {
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, .08);
+            transition: .2s;
+            border: none;
+        }
+
+        .auction:hover {
+            transform: translateY(-4px);
+        }
+
+        .auction-image {
+            height: 200px;
+            background: #ececec;
+        }
+
+        .auction-content {
+            padding: 16px;
+        }
+
+        .price {
+            font-size: 28px;
+            font-weight: bold;
+            color: #ff5a00;
+            margin: 10px 0;
+        }
+
+        .category {
+            display: inline-block;
+            background: #fff0e8;
+            color: #ff5a00;
+            padding: 5px 10px;
+            border-radius: 999px;
+            font-size: 12px;
+        }
+
+        .user,
+        .bid {
+            background: #fafafa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 10px;
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #ff5a00, #ff8c42);
+            color: #fff;
+            padding: 40px;
+            border-radius: 18px;
+            margin-bottom: 24px
+        }
+
+        .hero h1 {
+            font-size: 42px;
+            margin-bottom: 8px
+        }
+
+        .message {
+            background: #e7f5ff;
+            border: none;
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="header">
+
+        <div class="logo">
+            REST-API
+        </div>
+
+        <nav class="nav-menu">
+
+            <a href="index.html" class="nav-link">
+                🏠 Aukcje
+            </a>
+
+            <a href="add-auction.html" class="nav-link sell-btn">
+                + Sprzedaj
+            </a>
+
+            <a href="register.html" class="nav-link account-btn">
+                Załóż konto
+            </a>
+
+        </nav>
+
+    </header>
+
+    <div class="container">
+        <div class="hero">
+            <h1>Znajdź to, czego szukasz</h1>
+            <p>Tysiące aukcji w jednym miejscu.</p>
+        </div>
+
+        <h1>System aukcji internetowych REST</h1>
+
+        <div id="message" class="message">Frontend działa. Dane są pobierane przez REST API.</div>
+
+        <!-- <section>
+            <h2>Dodaj użytkownika</h2>
+            <input id="userUsername" placeholder="Nazwa użytkownika">
+            <input id="userEmail" placeholder="Email">
+            <input id="userFirstName" placeholder="Imię">
+            <input id="userLastName" placeholder="Nazwisko">
+            <button onclick="createUser()">Dodaj użytkownika</button>
+        </section>
+
+        <section>
+            <h2>Użytkownicy</h2>
+            <button onclick="loadUsers()">Odśwież użytkowników</button>
+            <div id="usersList"></div>
+        </section> -->
+
+        <!-- <section>
+            <h2>Dodaj aukcję</h2>
+            <input id="auctionTitle" placeholder="Tytuł aukcji">
+            <textarea id="auctionDescription" placeholder="Opis"></textarea>
+            <input id="auctionCategory" placeholder="Kategoria">
+            <input id="auctionStartingPrice" type="number" placeholder="Cena wywoławcza">
+            <input id="auctionStartDate" type="datetime-local">
+            <input id="auctionEndDate" type="datetime-local">
+            <input id="auctionOwnerId" type="number" placeholder="ID właściciela">
+            <button onclick="createAuction()">Dodaj aukcję</button>
+        </section> -->
+
+        <section>
+            <h2>Aukcje</h2>
+            <input id="filterCategory" placeholder="Filtr kategorii, np. Elektronika">
+            <select id="filterStatus">
+                <option value="">Wszystkie statusy</option>
+                <option value="1">Active</option>
+                <option value="2">Finished</option>
+                <option value="3">Cancelled</option>
+            </select>
+            <select id="sortBy">
+                <option value="">Sortuj domyślnie</option>
+                <option value="title">Tytuł</option>
+                <option value="price">Cena</option>
+                <option value="enddate">Data zakończenia</option>
+            </select>
+            <button onclick="loadAuctions()">Pokaż aukcje</button>
+            <div id="auctionsList"></div>
+        </section>
+
+        <section>
+            <h2>Złóż ofertę</h2>
+            <input id="bidAuctionId" type="number" placeholder="ID aukcji">
+            <input id="bidUserId" type="number" placeholder="ID użytkownika">
+            <input id="bidAmount" type="number" placeholder="Kwota oferty">
+            <button onclick="createBid()">Złóż ofertę</button>
+        </section>
+
+        <section>
+            <h2>Historia ofert</h2>
+            <input id="historyAuctionId" type="number" placeholder="ID aukcji">
+            <button onclick="loadBids()">Pokaż historię ofert</button>
+            <div id="bidsList"></div>
+        </section>
+
+        <script>
+            const apiUrl = window.location.origin;
+
+            function showMessage(text) {
+                document.getElementById("message").innerText = text;
+            }
+
+            async function createUser() {
+                const user = {
+                    username: document.getElementById("userUsername").value,
+                    email: document.getElementById("userEmail").value,
+                    firstName: document.getElementById("userFirstName").value,
+                    lastName: document.getElementById("userLastName").value
+                };
+
+                const response = await fetch(`${apiUrl}/users`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(user)
+                });
+
+                if (response.ok) {
+                    showMessage("Użytkownik został dodany.");
+                    loadUsers();
+                } else {
+                    const error = await response.json();
+                    showMessage(error.message || "Błąd dodawania użytkownika.");
+                }
+            }
+
+            async function loadUsers() {
+                const response = await fetch(`${apiUrl}/users`);
+                const users = await response.json();
+
+                const list = document.getElementById("usersList");
+                list.innerHTML = "";
+
+                users.forEach(user => {
+                    list.innerHTML += `
+                        <div class="user">
+                            <strong>ID: ${user.id}</strong><br>
+                            ${user.username} – ${user.email}<br>
+                            ${user.firstName} ${user.lastName}
+                        </div>
+                    `;
+                });
+            }
+
+            async function createAuction() {
+                const auction = {
+                    title: document.getElementById("auctionTitle").value,
+                    description: document.getElementById("auctionDescription").value,
+                    category: document.getElementById("auctionCategory").value,
+                    startingPrice: Number(document.getElementById("auctionStartingPrice").value),
+                    startDate: new Date(document.getElementById("auctionStartDate").value).toISOString(),
+                    endDate: new Date(document.getElementById("auctionEndDate").value).toISOString(),
+                    ownerId: Number(document.getElementById("auctionOwnerId").value)
+                };
+
+                const response = await fetch(`${apiUrl}/auctions`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(auction)
+                });
+
+                if (response.ok) {
+                    showMessage("Aukcja została dodana.");
+                    loadAuctions();
+                } else {
+                    const error = await response.json();
+                    showMessage(error.message || "Błąd dodawania aukcji.");
+                }
+            }
+
+            async function loadAuctions() {
+                const category = document.getElementById("filterCategory").value;
+                const status = document.getElementById("filterStatus").value;
+                const sortBy = document.getElementById("sortBy").value;
+
+                let url = `${apiUrl}/auctions?page=1&pageSize=20`;
+
+                if (category) {
+                    url += `&category=${encodeURIComponent(category)}`;
+                }
+
+                if (status) {
+                    url += `&status=${status}`;
+                }
+
+                if (sortBy) {
+                    url += `&sortBy=${sortBy}`;
+                }
+
+                const response = await fetch(url);
+                const auctions = await response.json();
+
+                const list = document.getElementById("auctionsList");
+                list.innerHTML = "";
+
+                auctions.forEach(auction => {
+                    list.innerHTML += `
+                        <div class="auction">
+                            <strong>ID: ${auction.id} – ${auction.title}</strong><br>
+                            Kategoria: ${auction.category}<br>
+                            Cena wywoławcza: ${auction.startingPrice}<br>
+                            Aktualna najwyższa oferta: ${auction.currentHighestBid}<br>
+                            Status: ${auction.status}<br>
+                            Właściciel ID: ${auction.ownerId}, ${auction.ownerUsername}<br>
+                            Start: ${auction.startDate}<br>
+                            Koniec: ${auction.endDate}<br>
+                            Opis: ${auction.description}
+                        </div>
+                    `;
+                });
+            }
+
+            async function createBid() {
+                const auctionId = Number(document.getElementById("bidAuctionId").value);
+
+                const bid = {
+                    userId: Number(document.getElementById("bidUserId").value),
+                    amount: Number(document.getElementById("bidAmount").value)
+                };
+
+                const response = await fetch(`${apiUrl}/auctions/${auctionId}/bids`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(bid)
+                });
+
+                if (response.ok) {
+                    showMessage("Oferta została złożona.");
+                    loadAuctions();
+                } else {
+                    const error = await response.json();
+                    showMessage(error.message || "Błąd składania oferty.");
+                }
+            }
+
+            async function loadBids() {
+                const auctionId = Number(document.getElementById("historyAuctionId").value);
+
+                const response = await fetch(`${apiUrl}/auctions/${auctionId}/bids`);
+
+                if (!response.ok) {
+                    showMessage("Nie znaleziono aukcji.");
+                    return;
+                }
+
+                const bids = await response.json();
+
+                const list = document.getElementById("bidsList");
+                list.innerHTML = "";
+
+                bids.forEach(bid => {
+                    list.innerHTML += `
+                        <div class="bid">
+                            <strong>Oferta ID: ${bid.id}</strong><br>
+                            Aukcja ID: ${bid.auctionId}<br>
+                            Użytkownik ID: ${bid.userId}, ${bid.username}<br>
+                            Kwota: ${bid.amount}<br>
+                            Data: ${bid.createdAt}
+                        </div>
+                    `;
+                });
+            }
+
+            loadUsers();
+            loadAuctions();
+        </script>
+    </div>
+</body>
+
+</html>

@@ -24,7 +24,7 @@
             align-items: center;
             justify-content: space-between;
             padding: 0 40px;
-            box-shadow: 0 2px 15px rgba(0, 0, 0, .08);
+            box-shadow: 0 2px 15px rgba(0,0,0,.08);
             position: sticky;
             top: 0;
             z-index: 100;
@@ -52,27 +52,27 @@
             transition: .2s;
         }
 
-        .nav-link:hover {
-            background: #f4f4f4;
-        }
+            .nav-link:hover {
+                background: #f4f4f4;
+            }
 
         .sell-btn {
             background: #ff5a00;
             color: white;
         }
 
-        .sell-btn:hover {
-            background: #e85000;
-        }
+            .sell-btn:hover {
+                background: #e85000;
+            }
 
         .account-btn {
             border: 2px solid #ff5a00;
             color: #ff5a00;
         }
 
-        .account-btn:hover {
-            background: #fff0e8;
-        }
+            .account-btn:hover {
+                background: #fff0e8;
+            }
 
         .container {
             max-width: 1400px;
@@ -88,17 +88,17 @@
             margin-bottom: 24px;
         }
 
-        .hero h1 {
-            font-size: 42px;
-            margin-bottom: 8px;
-        }
+            .hero h1 {
+                font-size: 42px;
+                margin-bottom: 8px;
+            }
 
         section {
             background: white;
             border-radius: 16px;
             padding: 24px;
             margin-bottom: 25px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, .06);
+            box-shadow: 0 4px 15px rgba(0,0,0,.06);
         }
 
         h1 {
@@ -114,9 +114,7 @@
             margin: 15px 0 10px 0;
         }
 
-        input,
-        textarea,
-        select {
+        input, textarea, select {
             width: 100%;
             padding: 12px;
             border: 1px solid #ddd;
@@ -136,25 +134,25 @@
             margin-bottom: 8px;
         }
 
-        button:hover {
-            background: #e85000;
-        }
+            button:hover {
+                background: #e85000;
+            }
 
         .gray-btn {
             background: #666;
         }
 
-        .gray-btn:hover {
-            background: #444;
-        }
+            .gray-btn:hover {
+                background: #444;
+            }
 
         .danger-btn {
             background: #c0392b;
         }
 
-        .danger-btn:hover {
-            background: #962d22;
-        }
+            .danger-btn:hover {
+                background: #962d22;
+            }
 
         .message {
             background: #e7f5ff;
@@ -188,13 +186,13 @@
             background: white;
             border-radius: 16px;
             padding: 18px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, .08);
+            box-shadow: 0 4px 12px rgba(0,0,0,.08);
             transition: .2s;
         }
 
-        .auction:hover {
-            transform: translateY(-3px);
-        }
+            .auction:hover {
+                transform: translateY(-3px);
+            }
 
         .user-panel {
             display: flex;
@@ -229,8 +227,7 @@
             margin-bottom: 10px;
         }
 
-        .user,
-        .bid {
+        .user, .bid {
             background: #fafafa;
             padding: 15px;
             border-radius: 10px;
@@ -253,17 +250,16 @@
             overflow: hidden;
         }
 
-        .users-table th,
-        .users-table td {
-            padding: 10px;
-            border-bottom: 1px solid #e6e6e6;
-            text-align: left;
-        }
+            .users-table th, .users-table td {
+                padding: 10px;
+                border-bottom: 1px solid #e6e6e6;
+                text-align: left;
+            }
 
-        .users-table th {
-            background: #fff0e8;
-            color: #333;
-        }
+            .users-table th {
+                background: #fff0e8;
+                color: #333;
+            }
 
         @media(max-width:768px) {
             .header {
@@ -292,42 +288,18 @@
 
 <body>
     <header class="header">
-
-        <div class="logo">
-            REST-API
-        </div>
-
+        <div class="logo">REST-API</div>
         <nav class="nav-menu">
-
-            <a href="index.html" class="nav-link">
-                🏠 Aukcje
-            </a>
-
-            <a href="add-auction.html" class="nav-link sell-btn">
-                + Sprzedaj
-            </a>
-
-            <a href="delete-auction.html" class="nav-link">
-                🗑️ Usuń aukcję
-            </a>
-
-            <a href="register.html" class="nav-link account-btn">
-                Zaloguj się
-            </a>
-
-
-
+            <a href="index.html" class="nav-link">🏠 Aukcje</a>
+            <a href="add-auction.html" class="nav-link sell-btn">+ Sprzedaj</a>
+            <a href="delete-auction.html" class="nav-link">🗑️ Usuń aukcję</a>
+            <a href="register.html" class="nav-link account-btn" id="loginBtn">Zaloguj się</a>
         </nav>
         <div class="user-panel">
             <span id="loggedUser"></span>
-            <button id="logoutBtn" onclick="logoutUser()" style="display:none;">
-                Wyloguj
-            </button>
-            <a href="admin.html" class="nav-link">
-                ⚙️ Admin
-            </a>
+            <button id="logoutBtn" onclick="logoutUser()" style="display:none;">Wyloguj</button>
+            <a href="admin.html" class="nav-link">⚙️ Admin</a>
         </div>
-
     </header>
 
     <div class="container">
@@ -340,60 +312,46 @@
 
         <section id="accountSection">
             <h2>Konto użytkownika</h2>
-
-            <div id="loggedUserBox" class="account-box">
-                Nie jesteś zalogowany.
-            </div>
-
+            <div id="loggedUserBox" class="account-box">Nie jesteś zalogowany.</div>
         </section>
 
         <section id="auctionsSection">
             <h2>Aukcje</h2>
-
             <input id="filterCategory" placeholder="Filtr kategorii, np. Elektronika">
-
             <select id="filterStatus">
                 <option value="">Wszystkie statusy</option>
                 <option value="1">Active</option>
                 <option value="2">Finished</option>
                 <option value="3">Cancelled</option>
             </select>
-
             <select id="sortBy">
                 <option value="">Sortuj domyślnie</option>
                 <option value="title">Tytuł</option>
                 <option value="price">Cena</option>
                 <option value="enddate">Data zakończenia</option>
             </select>
-
             <button onclick="loadAuctions()">Pokaż aukcje</button>
-
             <div id="auctionsList"></div>
         </section>
 
         <section>
             <h2>Złóż ofertę</h2>
             <p class="small-info">Oferta zostanie złożona jako aktualnie zalogowany użytkownik.</p>
-
             <input id="bidAuctionId" type="number" placeholder="ID aukcji">
             <input id="bidAmount" type="number" placeholder="Kwota oferty">
-
             <button onclick="createBid()">Złóż ofertę</button>
         </section>
 
         <section>
             <h2>Historia ofert</h2>
-
             <input id="historyAuctionId" type="number" placeholder="ID aukcji">
             <button onclick="loadBids()">Pokaż historię ofert</button>
-
             <div id="bidsList"></div>
         </section>
     </div>
 
     <script>
         const apiUrl = window.location.origin;
-
         let loggedUser = null;
 
         function showMessage(text) {
@@ -403,122 +361,64 @@
         function saveLoggedUser(user) {
             loggedUser = user;
             localStorage.setItem("loggedUserId", user.id);
+            localStorage.setItem("currentUser", JSON.stringify(user));
             showLoggedUser();
         }
 
         function clearLoggedUser() {
             loggedUser = null;
             localStorage.removeItem("loggedUserId");
+            localStorage.removeItem("currentUser");
+            localStorage.removeItem("token");
             showLoggedUser();
         }
 
         function showLoggedUser() {
-
-            const loggedUserBox =
-                document.getElementById("loggedUserBox");
-
-            const loggedUserLabel =
-                document.getElementById("loggedUser");
-
-            const logoutBtn =
-                document.getElementById("logoutBtn");
+            const loggedUserBox = document.getElementById("loggedUserBox");
+            const loggedUserLabel = document.getElementById("loggedUser");
+            const logoutBtn = document.getElementById("logoutBtn");
+            const loginBtn = document.getElementById("loginBtn");
 
             if (loggedUser == null) {
-
-                loggedUserBox.innerHTML =
-                    "Nie jesteś zalogowany.";
-
-                loggedUserLabel.innerHTML =
-                    "👤 Niezalogowany";
-
-                logoutBtn.style.display =
-                    "none";
-
+                loggedUserBox.innerHTML = "Nie jesteś zalogowany.";
+                loggedUserLabel.innerHTML = "👤 Niezalogowany";
+                logoutBtn.style.display = "none";
+                loginBtn.style.display = "inline-block";
                 return;
             }
 
             loggedUserBox.innerHTML = `
-        Zalogowano jako:
-        <strong>${loggedUser.username}</strong><br>
-        ID użytkownika:
-        <strong>${loggedUser.id}</strong><br>
+        Zalogowano jako: <strong>${loggedUser.username}</strong><br>
+        ID użytkownika: <strong>${loggedUser.id}</strong><br>
         Email: ${loggedUser.email}
     `;
-
-            loggedUserLabel.innerHTML =
-                `👤 ${loggedUser.username}`;
-
-            logoutBtn.style.display =
-                "inline-block";
+            loggedUserLabel.innerHTML = `<a href="register.html" style="color:#333; text-decoration:none;">👤 ${loggedUser.username}</a>`;
+            logoutBtn.style.display = "inline-block";
+            loginBtn.style.display = "none";
         }
 
-
         async function loadLoggedUserFromStorage() {
-            const userId = localStorage.getItem("loggedUserId");
+            const storedUser = localStorage.getItem("currentUser");
+            if (storedUser) {
+                loggedUser = JSON.parse(storedUser);
+                showLoggedUser();
+                return;
+            }
 
+            const userId = localStorage.getItem("loggedUserId");
             if (userId == null) {
                 showLoggedUser();
                 return;
             }
 
             const response = await fetch(`${apiUrl}/users/${userId}`);
-
             if (response.ok) {
                 loggedUser = await response.json();
+                localStorage.setItem("currentUser", JSON.stringify(loggedUser));
             } else {
-                localStorage.removeItem("loggedUserId");
-                loggedUser = null;
+                clearLoggedUser();
             }
-
             showLoggedUser();
-        }
-
-        async function registerUser() {
-            const user = {
-                username: document.getElementById("registerUsername").value,
-                email: document.getElementById("registerEmail").value,
-                firstName: document.getElementById("registerFirstName").value,
-                lastName: document.getElementById("registerLastName").value
-            };
-
-            const response = await fetch(`${apiUrl}/users`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(user)
-            });
-
-            if (response.ok) {
-                const createdUser = await response.json();
-                saveLoggedUser(createdUser);
-                showMessage("Konto zostało utworzone i użytkownik został zalogowany.");
-                loadUsers();
-            } else {
-                const error = await response.json();
-                showMessage(error.message || "Błąd zakładania konta.");
-            }
-        }
-
-        async function loginUser() {
-            const email = document.getElementById("loginEmail").value;
-
-            const response = await fetch(`${apiUrl}/users`);
-
-            if (!response.ok) {
-                showMessage("Nie udało się pobrać użytkowników.");
-                return;
-            }
-
-            const users = await response.json();
-
-            const user = users.find(u => u.email.toLowerCase() === email.toLowerCase());
-
-            if (user == null) {
-                showMessage("Nie znaleziono użytkownika z takim emailem.");
-                return;
-            }
-
-            saveLoggedUser(user);
-            showMessage("Zalogowano użytkownika.");
         }
 
         function logoutUser() {
@@ -527,31 +427,23 @@
         }
 
         async function updateProfile() {
-            if (loggedUser == null) {
-                showMessage("Najpierw zaloguj użytkownika.");
-                return;
-            }
-
+            if (loggedUser == null) { showMessage("Najpierw zaloguj użytkownika."); return; }
             const updatedUser = {
                 username: document.getElementById("profileUsername").value,
                 email: document.getElementById("profileEmail").value,
                 firstName: document.getElementById("profileFirstName").value,
                 lastName: document.getElementById("profileLastName").value
             };
-
             const response = await fetch(`${apiUrl}/users/${loggedUser.id}`, {
                 method: "PUT",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(updatedUser)
             });
-
             if (response.ok) {
-                const refreshedResponse = await fetch(`${apiUrl}/users/${loggedUser.id}`);
-                loggedUser = await refreshedResponse.json();
-                localStorage.setItem("loggedUserId", loggedUser.id);
+                loggedUser = { ...loggedUser, ...updatedUser };
+                localStorage.setItem("currentUser", JSON.stringify(loggedUser));
                 showLoggedUser();
                 showMessage("Dane konta zostały zaktualizowane.");
-                loadUsers();
             } else {
                 const error = await response.json();
                 showMessage(error.message || "Błąd aktualizacji profilu.");
@@ -559,25 +451,12 @@
         }
 
         async function deleteMyAccount() {
-            if (loggedUser == null) {
-                showMessage("Najpierw zaloguj użytkownika.");
-                return;
-            }
-
-            const confirmDelete = confirm("Czy na pewno chcesz usunąć swoje konto?");
-
-            if (!confirmDelete) {
-                return;
-            }
-
-            const response = await fetch(`${apiUrl}/users/${loggedUser.id}`, {
-                method: "DELETE"
-            });
-
+            if (loggedUser == null) { showMessage("Najpierw zaloguj użytkownika."); return; }
+            if (!confirm("Czy na pewno chcesz usunąć swoje konto?")) return;
+            const response = await fetch(`${apiUrl}/users/${loggedUser.id}`, { method: "DELETE" });
             if (response.ok) {
                 clearLoggedUser();
                 showMessage("Konto zostało usunięte.");
-                loadUsers();
                 loadAuctions();
             } else {
                 const error = await response.json();
@@ -585,127 +464,19 @@
             }
         }
 
-        async function loadUsers() {
-            const response = await fetch(`${apiUrl}/users`);
-
-            if (!response.ok) {
-                showMessage("Nie udało się pobrać listy użytkowników.");
-                return;
-            }
-
-            const users = await response.json();
-
-            const list = document.getElementById("usersList");
-
-            if (users.length === 0) {
-                list.innerHTML = "<p>Brak użytkowników w bazie.</p>";
-                return;
-            }
-
-            let html = `
-                    <table class="users-table">
-                        <thead>
-                            <tr>
-                                <th>ID</th>
-                                <th>Username</th>
-                                <th>Email</th>
-                                <th>Imię</th>
-                                <th>Nazwisko</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                `;
-
-            users.forEach(user => {
-                html += `
-                        <tr>
-                            <td>${user.id}</td>
-                            <td>${user.username}</td>
-                            <td>${user.email}</td>
-                            <td>${user.firstName}</td>
-                            <td>${user.lastName}</td>
-                        </tr>
-                    `;
-            });
-
-            html += `
-                        </tbody>
-                    </table>
-                `;
-
-            list.innerHTML = html;
-        }
-
-        async function createAuction() {
-            if (loggedUser == null) {
-                showMessage("Najpierw zaloguj użytkownika, żeby wystawić aukcję.");
-                return;
-            }
-
-            const startDateValue = document.getElementById("auctionStartDate").value;
-            const endDateValue = document.getElementById("auctionEndDate").value;
-
-            if (!startDateValue || !endDateValue) {
-                showMessage("Podaj datę rozpoczęcia i zakończenia aukcji.");
-                return;
-            }
-
-            const auction = {
-                title: document.getElementById("auctionTitle").value,
-                description: document.getElementById("auctionDescription").value,
-                category: document.getElementById("auctionCategory").value,
-                startingPrice: Number(document.getElementById("auctionStartingPrice").value),
-                startDate: new Date(startDateValue).toISOString(),
-                endDate: new Date(endDateValue).toISOString(),
-                ownerId: loggedUser.id
-            };
-
-            const response = await fetch(`${apiUrl}/auctions`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify(auction)
-            });
-
-            if (response.ok) {
-                showMessage("Aukcja została dodana.");
-                loadAuctions();
-            } else {
-                const error = await response.json();
-                showMessage(error.message || "Błąd dodawania aukcji.");
-            }
-        }
-
         async function loadAuctions() {
             const category = document.getElementById("filterCategory").value;
             const status = document.getElementById("filterStatus").value;
             const sortBy = document.getElementById("sortBy").value;
-
             let url = `${apiUrl}/auctions?page=1&pageSize=20`;
-
-            if (category) {
-                url += `&category=${encodeURIComponent(category)}`;
-            }
-
-            if (status) {
-                url += `&status=${status}`;
-            }
-
-            if (sortBy) {
-                url += `&sortBy=${sortBy}`;
-            }
-
+            if (category) url += `&category=${encodeURIComponent(category)}`;
+            if (status) url += `&status=${status}`;
+            if (sortBy) url += `&sortBy=${sortBy}`;
             const response = await fetch(url);
-
-            if (!response.ok) {
-                showMessage("Nie udało się pobrać aukcji.");
-                return;
-            }
-
+            if (!response.ok) { showMessage("Nie udało się pobrać aukcji."); return; }
             const auctions = await response.json();
-
             const list = document.getElementById("auctionsList");
             list.innerHTML = "";
-
             auctions.forEach(auction => {
                 list.innerHTML += `
                         <div class="auction">
@@ -724,48 +495,25 @@
         }
 
         async function createBid() {
-            if (loggedUser == null) {
-                showMessage("Najpierw zaloguj użytkownika, żeby złożyć ofertę.");
-                return;
-            }
-
+            if (loggedUser == null) { showMessage("Najpierw zaloguj użytkownika, żeby złożyć ofertę."); return; }
             const auctionId = Number(document.getElementById("bidAuctionId").value);
-
-            const bid = {
-                userId: loggedUser.id,
-                amount: Number(document.getElementById("bidAmount").value)
-            };
-
+            const bid = { userId: loggedUser.id, amount: Number(document.getElementById("bidAmount").value) };
             const response = await fetch(`${apiUrl}/auctions/${auctionId}/bids`, {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(bid)
             });
-
-            if (response.ok) {
-                showMessage("Oferta została złożona.");
-                loadAuctions();
-            } else {
-                const error = await response.json();
-                showMessage(error.message || "Błąd składania oferty.");
-            }
+            if (response.ok) { showMessage("Oferta została złożona."); loadAuctions(); }
+            else { const error = await response.json(); showMessage(error.message || "Błąd składania oferty."); }
         }
 
         async function loadBids() {
             const auctionId = Number(document.getElementById("historyAuctionId").value);
-
             const response = await fetch(`${apiUrl}/auctions/${auctionId}/bids`);
-
-            if (!response.ok) {
-                showMessage("Nie znaleziono aukcji.");
-                return;
-            }
-
+            if (!response.ok) { showMessage("Nie znaleziono aukcji."); return; }
             const bids = await response.json();
-
             const list = document.getElementById("bidsList");
             list.innerHTML = "";
-
             bids.forEach(bid => {
                 list.innerHTML += `
                         <div class="bid">
@@ -780,9 +528,7 @@
         }
 
         loadLoggedUserFromStorage();
-        loadUsers();
         loadAuctions();
     </script>
 </body>
-
 </html>

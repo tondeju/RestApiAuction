@@ -32,6 +32,12 @@ public class UserRepository : IUserRepository
             .FirstOrDefaultAsync(u => u.Email == email);
     }
 
+    public async Task<User?> GetByUsernameAsync(string username)
+    {
+        return await _context.Users
+            .FirstOrDefaultAsync(u => u.Username == username);
+    }
+
     public async Task<User> AddAsync(User user)
     {
         _context.Users.Add(user);
@@ -50,9 +56,7 @@ public class UserRepository : IUserRepository
         var user = await GetByIdAsync(id);
 
         if (user == null)
-        {
             return false;
-        }
 
         _context.Users.Remove(user);
         return await _context.SaveChangesAsync() > 0;

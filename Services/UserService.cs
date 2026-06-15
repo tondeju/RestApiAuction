@@ -75,7 +75,13 @@ public class UserService : IUserService
 
     public async Task<(bool Success, string? Error, LoginResponseDto? Response)> LoginAsync(LoginDto dto)
     {
-        var user = await _userRepository.GetByEmailAsync(dto.Email);
+        User? user;
+
+        if (dto.Email.Contains("@"))
+            user = await _userRepository.GetByEmailAsync(dto.Email);
+        else
+            user = await _userRepository.GetByUsernameAsync(dto.Email);
+
         if (user == null || !BCrypt.Net.BCrypt.Verify(dto.Password, user.PasswordHash))
             return (false, "Invalid email or password.", null);
 

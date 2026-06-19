@@ -156,7 +156,7 @@ System realizuje następujące reguły biznesowe:
 
 ### Wymagania
 
-- .NET SDK 8.0 lub nowszy
+- .NET SDK 10.0 lub nowszy
 - SQLite
 
 ### Uruchomienie
@@ -165,6 +165,11 @@ Przywrócenie pakietów:
 
 ```bash
 dotnet restore
+```
+
+Instalacja narzędzi Entity Framework Core (jeśli nie zostały wcześniej zainstalowane):
+```bash
+dotnet tool install --global dotnet-ef
 ```
 
 Utworzenie bazy danych:

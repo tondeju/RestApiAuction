@@ -1,95 +1,54 @@
-# Auction REST API
+# System Aukcyjny REST API
 
-Internetowy system aukcyjny oparty o architekturę REST API, stworzony w technologii ASP.NET Core oraz Entity Framework Core.
+## 1. Opis projektu
 
-Projekt umożliwia zarządzanie użytkownikami, aukcjami oraz ofertami składanymi przez użytkowników. Aplikacja posiada również prosty frontend inspirowany serwisami aukcyjnymi takimi jak Allegro.
+System Aukcyjny REST API to aplikacja backendowa stworzona w technologii ASP.NET Core umożliwiająca zarządzanie aukcjami internetowymi. System pozwala na rejestrację użytkowników, tworzenie aukcji oraz składanie ofert na aktywne aukcje.
 
----
-
-## Funkcjonalności
-
-### Użytkownicy
-
-- Rejestracja użytkownika
-- Pobieranie listy użytkowników
-- Pobieranie użytkownika po identyfikatorze
-
-### Aukcje
-
-- Tworzenie aukcji
-- Pobieranie listy aukcji
-- Pobieranie szczegółów aukcji
-- Aktualizacja aukcji
-- Usuwanie aukcji
-- Filtrowanie po kategorii
-- Filtrowanie po statusie
-- Sortowanie wyników
-- Stronicowanie wyników
-
-### Oferty
-
-- Składanie ofert na aukcje
-- Pobieranie historii ofert dla aukcji
-- Walidacja ofert
-- Aktualizacja najwyższej oferty
+Projekt został wykonany w architekturze warstwowej zgodnie z zasadami REST.
 
 ---
 
-## Zastosowane technologie
-
-### Backend
+## 2. Wykorzystane technologie
 
 - ASP.NET Core Web API
 - Entity Framework Core
 - SQLite
+- JWT Authentication
 - Swagger / OpenAPI
-- Dependency Injection
-- Repository Pattern
-- DTO Pattern
-
-### Frontend
-
-- HTML5
-- CSS3
-- JavaScript (Vanilla JS)
-- Fetch API
+- Scalar API Reference
+- C#
 
 ---
 
-## Struktura projektu
+## 3. Architektura systemu
 
-```text
-AuctionRestApi
-│
-├── Controllers
-│   ├── AuctionsController.cs
-│   ├── BidsController.cs
-│   └── UsersController.cs
-│
-├── DTOs
-│
-├── Models
-│   ├── Auction.cs
-│   ├── Bid.cs
-│   └── User.cs
-│
-├── Repositories
-│
-├── Services
-│
-├── Data
-│   └── AppDbContext.cs
-│
-└── Frontend
-    ├── index.html
-    ├── register.html
-    ├── add-auction.html
-    └── delete-auction.html
-```
+Aplikacja została zaprojektowana w architekturze warstwowej.
+
+### Warstwy systemu
+
+#### Controllers
+
+Odpowiadają za obsługę żądań HTTP oraz komunikację z klientem.
+
+#### Services
+
+Zawierają logikę biznesową aplikacji.
+
+#### Repositories
+
+Realizują dostęp do danych zapisanych w bazie.
+
+#### Database
+
+Przechowuje dane użytkowników, aukcji oraz ofert.
+
+### Schemat przepływu danych
+
+Client → Controller → Service → Repository → Database
 
 ---
 
-## Model danych
+## 4. Model danych
 
 ### User
 
@@ -126,163 +85,117 @@ AuctionRestApi
 | Amount    | decimal  |
 | CreatedAt | DateTime |
 
----
+### Relacje między encjami
 
-## Statusy aukcji
+- User (1) → (N) Auction
+- User (1) → (N) Bid
+- Auction (1) → (N) Bid
 
-```csharp
-Active
-Finished
-Cancelled
-```
+### Klucze obce
 
----
-
-## Endpointy API
-
-### Users
-
-```http
-GET /users
-GET /users/{id}
-POST /users
-```
-
-### Auctions
-
-```http
-GET /auctions
-GET /auctions/{id}
-POST /auctions
-PUT /auctions/{id}
-DELETE /auctions/{id}
-```
-
-### Bids
-
-```http
-GET /auctions/{auctionId}/bids
-POST /auctions/{auctionId}/bids
-```
+- Auction.OwnerId → User.Id
+- Bid.UserId → User.Id
+- Bid.AuctionId → Auction.Id
 
 ---
 
-## Walidacja biznesowa
+## 5. Endpointy API
 
-System uniemożliwia:
+### Użytkownicy
 
-- składanie ofert na nieistniejące aukcje
-- składanie ofert przez nieistniejących użytkowników
-- składanie ofert na zakończone aukcje
-- składanie ofert przed rozpoczęciem aukcji
-- składanie ofert przez właściciela aukcji
-- składanie ofert niższych od aktualnej najwyższej oferty
-- ustawienie daty zakończenia wcześniejszej niż data rozpoczęcia
+| Metoda | Endpoint        | Opis                        |
+| ------ | --------------- | --------------------------- |
+| GET    | /users          | Pobranie listy użytkowników |
+| GET    | /users/{id}     | Pobranie użytkownika        |
+| POST   | /users          | Dodanie użytkownika         |
+| POST   | /users/register | Rejestracja użytkownika     |
+| POST   | /users/login    | Logowanie użytkownika       |
+| PUT    | /users/{id}     | Aktualizacja użytkownika    |
+| DELETE | /users/{id}     | Usunięcie użytkownika       |
 
----
+### Aukcje
 
-## Frontend
+| Metoda | Endpoint       | Opis                       |
+| ------ | -------------- | -------------------------- |
+| GET    | /auctions      | Pobranie listy aukcji      |
+| GET    | /auctions/{id} | Pobranie szczegółów aukcji |
+| POST   | /auctions      | Utworzenie aukcji          |
+| PUT    | /auctions/{id} | Edycja aukcji              |
+| DELETE | /auctions/{id} | Usunięcie aukcji           |
 
-Frontend został przygotowany jako prosta aplikacja SPA korzystająca z REST API.
+#### Obsługiwane parametry
 
-Dostępne podstrony:
+- category
+- status
+- page
+- pageSize
+- sortBy
 
-### Strona główna
+### Oferty
 
-```text
-index.html
-```
-
-Funkcje:
-
-- przeglądanie aukcji
-- filtrowanie
-- sortowanie
-- składanie ofert
-- podgląd historii ofert
-
-### Rejestracja
-
-```text
-register.html
-```
-
-Funkcje:
-
-- tworzenie nowego użytkownika
-
-### Dodawanie aukcji
-
-```text
-add-auction.html
-```
-
-Funkcje:
-
-- wystawianie nowych aukcji
-
-### Usuwanie aukcji
-
-```text
-delete-auction.html
-```
-
-Funkcje:
-
-- usuwanie aukcji po identyfikatorze
+| Metoda | Endpoint                   | Opis                   |
+| ------ | -------------------------- | ---------------------- |
+| GET    | /auctions/{auctionId}/bids | Lista ofert dla aukcji |
+| POST   | /auctions/{auctionId}/bids | Dodanie oferty         |
 
 ---
 
-## Uruchomienie projektu
+## 6. Walidacja biznesowa
 
-### 1. Sklonuj repozytorium
+System realizuje następujące reguły biznesowe:
 
-```bash
-git clone https://github.com/twoje-konto/AuctionRestApi.git
-```
+- nazwa użytkownika musi być unikalna,
+- adres e-mail musi być unikalny,
+- nie można złożyć oferty niższej od aktualnie najwyższej,
+- nie można składać ofert na zakończonych aukcjach,
+- data zakończenia aukcji musi być późniejsza niż data rozpoczęcia.
 
-### 2. Przejdź do katalogu projektu
+---
 
-```bash
-cd AuctionRestApi
-```
+## 7. Uruchomienie projektu
 
-### 3. Przywróć pakiety
+### Wymagania
+
+- .NET SDK 8.0 lub nowszy
+- SQLite
+
+### Uruchomienie
+
+Przywrócenie pakietów:
 
 ```bash
 dotnet restore
 ```
 
-### 4. Utwórz bazę danych
+Utworzenie bazy danych:
 
 ```bash
 dotnet ef database update
 ```
 
-### 5. Uruchom aplikację
+Uruchomienie aplikacji:
 
 ```bash
 dotnet run
 ```
 
----
-
-## Dokumentacja API
-
-Po uruchomieniu aplikacji dokumentacja Swagger dostępna jest pod adresem:
-
-```text
-https://localhost:xxxx/swagger
-```
+Po uruchomieniu dokumentacja API dostępna jest pod adresem Swagger.
 
 ---
 
-## Autor
+## 8. Testowanie API
 
-Projekt wykonany w celach edukacyjnych jako implementacja systemu aukcyjnego opartego o REST API i ASP.NET Core.
+Do testowania endpointów można wykorzystać:
 
-<tr>
-Julian Tonder,
-Mateusz Wielgat,
-Filip Wojtan,
-Radosław Kur,
+- Swagger UI
+- Scalar API Reference
+- Postman
+
+---
+
+## 9. Autorzy
+
+- Julian Tonder
+- Mateusz Wielgat
+- Filip Wojtan
+- Radosław Kur

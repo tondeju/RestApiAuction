@@ -26,5 +26,45 @@ Frontend został wykonany jako prosta strona HTML/JavaScript umieszczona w folde
 
 Projekt wykorzystuje architekturę warstwową:
 
-```text
+````text
 Controller → Service → Repository → Database
+## Diagram ERD
+
+```mermaid
+erDiagram
+
+    USER ||--o{ AUCTION : owns
+    USER ||--o{ BID : places
+    AUCTION ||--o{ BID : contains
+
+    USER {
+        int Id PK
+        string Username
+        string Email
+        string FirstName
+        string LastName
+        string PasswordHash
+        datetime CreatedAt
+    }
+
+    AUCTION {
+        int Id PK
+        string Title
+        string Description
+        string Category
+        decimal StartingPrice
+        decimal CurrentHighestBid
+        datetime StartDate
+        datetime EndDate
+        string Status
+        int OwnerId FK
+    }
+
+    BID {
+        int Id PK
+        int AuctionId FK
+        int UserId FK
+        decimal Amount
+        datetime CreatedAt
+    }
+````
